@@ -8,6 +8,7 @@ for(i=0;i<256;i++){
 
 const squares=document.querySelectorAll('.square');
 
+//toggle on the class then remove the event listener so that the squares stay colored
 function colorSquare(event){
   this.classList.toggle('colored-square');
   this.removeEventListener('mouseenter',colorSquare);
