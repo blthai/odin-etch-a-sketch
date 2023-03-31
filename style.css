@@ -10,3 +10,8 @@
   height: 800px;
   border: solid black 2px; 
 }
+
+.colored-square{
+  background-color: rgb(168, 204, 132);
+}
+
