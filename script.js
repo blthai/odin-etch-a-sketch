@@ -7,6 +7,7 @@ function colorSquare(event){
   this.removeEventListener('mouseenter',colorSquare);
 }
 
+//add a container child node with class '.square' and an event listener for each loop
 function addSquares(amountAdded){
   for(i=0;i<amountAdded;i++){
     let square=document.createElement('div');
@@ -16,12 +17,14 @@ function addSquares(amountAdded){
   }
 }
 
+//remove a container child node for each loop
 function removeSquares(amountRemoved){
   for(i=0;i<amountRemoved;i++){
     container.removeChild(container.firstChild)
   }
 }
 
+//if the square has been colored, turn off the '.colored-square' class to reset its color, then add the event listener so that the square can be colored once again
 function resetSquare(square){
   if(square.classList.contains('colored-square')){
     square.classList.toggle('colored-square');
@@ -29,18 +32,22 @@ function resetSquare(square){
   }
 }
 
+//set the new side length for both width and height because it is a square and width=height, then call resetSquare to return it to its original color and have it listen for an event again
 function adjustSquare(square, newSideLength){
   square.style.width=newSideLength;
   square.style.height=newSideLength;
   resetSquare(square);
 }
 
+//perform the calculation to get the new side length in pixels and return it for use in the adjustSquare function so that the calculation only needs to be done once per grid refresh
 function getNewSideLength(square, quantity){
   const containerStyle=getComputedStyle(container);
   return (parseInt(containerStyle.width)/parseInt(quantity)+'px');
 }
 
-//prompt the user for an amount, check to see if the amount number is valid, then
+//prompt the user for an amount to add or remove, check if the input is valid, then add or remove squares using the respective functions. 
+//reset the squares reference to point to the newly modified nodelist of squares so that future calls to the nodelist and squares.length will be accurate
+//adjust the size, color, and event listeners of each square
 function resize(event){
   let input=window.prompt('Enter a positive number into the box below to set the sides to contain that amount of squares, the max is 100.');
   let totalSquares=Number(input)**2;
@@ -63,6 +70,7 @@ function resize(event){
   }
 }
 
+//initialize the grid for when the page initially loads
 for(i=0;i<256;i++){
   let square=document.createElement('div');
   square.classList.add('square');
