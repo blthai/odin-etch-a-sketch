@@ -1,4 +1,3 @@
-//on add and remove squares do the event lsitener in the loop
 const container=document.querySelector('.container');
 const button=document.querySelector('button');
 
@@ -15,8 +14,6 @@ function addSquares(amountAdded){
     square.addEventListener('mouseenter',colorSquare);
     container.appendChild(square);
   }
-  //squares=document.querySelectorAll('.square');
- // squares.forEach((square)=>{square.addEventListener('mouseenter',colorSquare)});
 }
 
 function removeSquares(amountRemoved){
@@ -32,14 +29,15 @@ function resetSquare(square){
   }
 }
 
-
-//may need to remove child nodes or add child nodes, first check if we need to remove or add hceck nodelist.length then have a for loop to add or remove child nodes from container and keep the resizing function
-function adjustSquare(square, quantity){
-  const squareStyle=getComputedStyle(square);
-  const containerStyle=getComputedStyle(container);
-  square.style.width=(parseInt(containerStyle.width)/parseInt(quantity))+'px';
-  square.style.height=(parseInt(containerStyle.width)/parseInt(quantity))+'px';
+function adjustSquare(square, newSideLength){
+  square.style.width=newSideLength;
+  square.style.height=newSideLength;
   resetSquare(square);
+}
+
+function getNewSideLength(square, quantity){
+  const containerStyle=getComputedStyle(container);
+  return (parseInt(containerStyle.width)/parseInt(quantity)+'px');
 }
 
 //prompt the user for an amount, check to see if the amount number is valid, then
@@ -60,8 +58,8 @@ function resize(event){
       removeSquares(squares.length-totalSquares);
     }
     squares=document.querySelectorAll('.square');
-    squares.forEach((square)=>adjustSquare(square, input));
-    //squares.forEach((square)=>resetGrid(square));
+    let newSideLength=getNewSideLength(squares.firstChild, input);
+    squares.forEach((square)=>adjustSquare(square, newSideLength));
   }
 }
 
