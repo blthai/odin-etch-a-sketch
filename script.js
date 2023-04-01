@@ -2,14 +2,6 @@
 const container=document.querySelector('.container');
 const button=document.querySelector('button');
 
-for(i=0;i<256;i++){
-  let square=document.createElement('div');
-  square.classList.add('square');
-  container.appendChild(square);
-}
-
-let squares=document.querySelectorAll('.square');
-
 //toggle on the class then remove the event listener so that the squares stay colored
 function colorSquare(event){
   this.classList.toggle('colored-square');
@@ -74,6 +66,14 @@ function resize(event){
     //squares.forEach((square)=>resetGrid(square));
   }
 }
+
+for(i=0;i<256;i++){
+  let square=document.createElement('div');
+  square.classList.add('square');
+  container.appendChild(square);
+}
+
+let squares=document.querySelectorAll('.square');
 
 squares.forEach((square)=>{square.addEventListener('mouseenter',colorSquare)});
 
