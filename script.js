@@ -1,8 +1,6 @@
 //on add and remove squares do the event lsitener in the loop
-
 const container=document.querySelector('.container');
 const button=document.querySelector('button');
-
 
 for(i=0;i<256;i++){
   let square=document.createElement('div');
@@ -22,24 +20,26 @@ function addSquares(amountAdded){
   for(i=0;i<amountAdded;i++){
     let square=document.createElement('div');
     square.classList.add('square');
+    square.addEventListener('mouseenter',colorSquare);
     container.appendChild(square);
   }
-  squares=document.querySelectorAll('.square');
-  squares.forEach((square)=>{square.addEventListener('mouseenter',colorSquare)});
+  //squares=document.querySelectorAll('.square');
+ // squares.forEach((square)=>{square.addEventListener('mouseenter',colorSquare)});
 }
 
 function removeSquares(amountRemoved){
   for(i=0;i<amountRemoved;i++){
     container.removeChild(container.firstChild)
   }
-  squares=document.querySelectorAll('.square');
-  squares.forEach((square)=>{square.addEventListener('mouseenter',colorSquare)});
+  //squares=document.querySelectorAll('.square');
+  //squares.forEach((square)=>{square.addEventListener('mouseenter',colorSquare)});
 }
 
 
 function resetSquare(square){
   if(square.classList.contains('colored-square')){
     square.classList.toggle('colored-square');
+    square.addEventListener('mouseenter',colorSquare);
   }
 }
 
@@ -69,6 +69,7 @@ function resize(event){
     else{
       removeSquares(squares.length-(Number(input)**2));
     }
+    squares=document.querySelectorAll('.square');
     squares.forEach((square)=>adjustSquare(square, input));
     //squares.forEach((square)=>resetGrid(square));
   }
