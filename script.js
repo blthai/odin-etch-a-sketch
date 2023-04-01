@@ -1,11 +1,7 @@
+//use data attributes like data-red data-blue to store the ORIGINAL rgb values in each square and to refer to when making 10 percent darkness adjustments; 
+// background-color: rgb(168, 204, 132);
 const container=document.querySelector('.container');
 const button=document.querySelector('button');
-
-//toggle on the class then remove the event listener so that the squares stay colored
-function colorSquare(event){
-  this.classList.toggle('colored-square');
-  this.removeEventListener('mouseenter',colorSquare);
-}
 
 //add a container child node with class '.square' and an event listener for each loop
 function addSquares(amountAdded){
@@ -24,9 +20,20 @@ function removeSquares(amountRemoved){
   }
 }
 
+//toggle on the class then remove the event listener so that the squares stay colored
+function colorSquare(event){
+  let red=Math.floor(Math.random()*256);
+  let blue=Math.floor(Math.random()*256);
+  let green=Math.floor(Math.random()*256);
+  this.classList.toggle('colored-square');
+  this.style.backgroundColor=`rgb(${red},${blue},${green})`;
+  this.removeEventListener('mouseenter',colorSquare);
+}
+
 //if the square has been colored, turn off the '.colored-square' class to reset its color, then add the event listener so that the square can be colored once again
 function resetSquare(square){
   if(square.classList.contains('colored-square')){
+    square.style.backgroundColor='rgb(255,255,255)';
     square.classList.toggle('colored-square');
     square.addEventListener('mouseenter',colorSquare);
   }
