@@ -7,6 +7,7 @@ function addSquares(amountAdded){
     let square=document.createElement('div');
     square.classList.add('square');
     square.addEventListener('mouseenter',colorSquare);
+    square.style.backgroundColor='rgb(255,255,255)';
     container.appendChild(square);
   }
 }
@@ -102,6 +103,7 @@ function resize(event){
 for(i=0;i<256;i++){
   let square=document.createElement('div');
   square.classList.add('square');
+  square.style.backgroundColor='rgb(255,255,255)';
   container.appendChild(square);
 }
 
