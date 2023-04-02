@@ -1,1 +1,3 @@
 # odin-etch-a-sketch
+
+Following the Odin Project guidelines for this project, this etch-a-sketch project comprises of a 1000px container grid with any number of squares between 1 to 100 residing within it. The squares change to a random RGB value based color upon mouse hover. Per the "extra credit" specifications, the squares will become 10% darker until they are black upon the 10th mouse hover event received.
