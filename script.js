@@ -1,5 +1,3 @@
-//use data attributes like data-red data-blue to store the ORIGINAL rgb values in each square and to refer to when making 10 percent darkness adjustments; 
-// background-color: rgb(168, 204, 132);
 const container=document.querySelector('.container');
 const button=document.querySelector('button');
 
@@ -21,21 +19,44 @@ function removeSquares(amountRemoved){
 }
 
 //toggle on the class then remove the event listener so that the squares stay colored
+//if the square has not been colored, generate a rgb color and store the values in its rgb data attributes
+//if the square has been colored, use the initial rgb values to subtract 10% of the original value from the current rgb values
 function colorSquare(event){
-  let red=Math.floor(Math.random()*256);
-  let blue=Math.floor(Math.random()*256);
-  let green=Math.floor(Math.random()*256);
-  this.classList.toggle('colored-square');
-  this.style.backgroundColor=`rgb(${red},${blue},${green})`;
-  this.removeEventListener('mouseenter',colorSquare);
+  if(this.classList.contains('colored-square')){
+    this.dataset.red=this.dataset.red-(this.dataset.redInitial*.1);
+    this.dataset.blue=this.dataset.blue-(this.dataset.blueInitial*.1);
+    this.dataset.green=this.dataset.green-(this.dataset.greenInitial*.1);
+    this.style.backgroundColor=`rgb(${this.dataset.red},${this.dataset.blue},${this.dataset.green})`;
+  }
+  else{
+    let red=Math.floor(Math.random()*256);
+    let blue=Math.floor(Math.random()*256);
+    let green=Math.floor(Math.random()*256);
+    this.classList.toggle('colored-square');
+    this.dataset.redInitial=red;
+    this.dataset.blueInitial=blue;
+    this.dataset.greenInitial=green;
+    this.dataset.red=red;
+    this.dataset.blue=blue;
+    this.dataset.green=green;
+    this.style.backgroundColor=`rgb(${red},${blue},${green})`;
+  }
+  
 }
 
 //if the square has been colored, turn off the '.colored-square' class to reset its color, then add the event listener so that the square can be colored once again
+//reset the rgb data attributes to an empty string for a cleaner grid upon refresh
 function resetSquare(square){
   if(square.classList.contains('colored-square')){
     square.style.backgroundColor='rgb(255,255,255)';
     square.classList.toggle('colored-square');
     square.addEventListener('mouseenter',colorSquare);
+    square.dataset.redInitial='';
+    square.dataset.blueInitial='';
+    square.dataset.greenInitial='';
+    square.dataset.red='';
+    square.dataset.blue='';
+    square.dataset.green='';
   }
 }
 
